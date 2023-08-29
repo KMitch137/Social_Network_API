@@ -13,12 +13,22 @@ const userSchema = new Schema(
       required: true,
       // add unique and match valid email address,
     },
-    thoughts: {
-      // add array of _id values referencing the Thought model
-    },
-    friends: {
-      // add array of _id values referencing the User model (self reference)
-    }
+
+    // add array of _id values referencing the Thought model
+    thoughts: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'thought',
+      },
+    ],
+
+    // add array of _id values referencing the User model (self reference)
+    friends: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: 'user',
+      },
+    ],
   },
   {
     toJSON: {
@@ -34,4 +44,3 @@ userSchema.virtual('friendCount').get(function () {
 const User = model('user', userSchema);
 
 module.exports = User;
- 

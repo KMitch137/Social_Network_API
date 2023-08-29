@@ -2,10 +2,10 @@ const { Thought, User } = require('../models');
 
 module.exports = {
   // Get all thoughts
-  async getThoughtss(req, res) {
+  async getThoughts(req, res) {
     try {
       const thoughts = await Thought.find();
-      res.json(thought);
+      res.json(thoughts);
     } catch (err) {
       res.status(500).json(err);
     }
@@ -68,4 +68,14 @@ module.exports = {
       res.status(500).json(err);
     }
   },
+    // Create a reaction
+    async createReaction(req, res) {
+      try {
+        const reaction = await Reaction.create(req.body);
+        res.json(reaction);
+      } catch (err) {
+        console.log(err);
+        return res.status(500).json(err);
+      }
+    },
 };
